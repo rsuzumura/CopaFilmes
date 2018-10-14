@@ -2,6 +2,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
+body {
+    background: #EEE;
+}
 app-root {
     display: flex;
     flex-direction: column;

@@ -1,0 +1,6 @@
+<ul *ngIf="vencedores != null" class="mat-typography">
+    <li *ngFor="let vencedor of vencedores; let i = index">
+        <span class="badge">{{i + 1}}º</span>
+        <b>{{vencedor.titulo}}</b>
+    </li>
+</ul>

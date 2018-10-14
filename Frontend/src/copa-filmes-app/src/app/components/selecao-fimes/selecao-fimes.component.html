@@ -1,7 +1,35 @@
-<div class="content">
-    <app-descricao-pagina titulo="Fase de Seleção" descricao="Selecione 8 filmes que você deseja que entrem na competição e depois pressione o botão Gerar Meu Campeonato para prosseguir"></app-descricao-pagina>
-    <mat-grid-list cols="4">
-        <mat-grid-tile *ngFor="let filme of filmes">1</mat-grid-tile>
-    </mat-grid-list>
-    selecao-fimes works!
-</div>
+<ng-template #blockTemplate>
+    <div class="block-ui-spinner mat-typography">
+        <div class="loader"></div>
+        <div class="message"> Aguarde...</div>
+    </div>
+</ng-template>
+
+<block-ui [template]="blockTemplate">
+    <div class="content">
+        <app-descricao-pagina titulo="Fase de Seleção" descricao="Selecione 8 filmes que você deseja que entrem na competição e depois pressione o botão Gerar Meu Campeonato para prosseguir">
+        </app-descricao-pagina>
+
+        <div class="container">
+            <div fxLayout="row" class="row">
+                <div fxFlex="50" class="mat-typography">
+                    <div><b>Selecionados:</b></div>
+                    <div [class.torneio-completo]="torneio.filmesParticipantes.length === maximoParticipantes">
+                        <b>{{torneio.filmesParticipantes.length}} de {{maximoParticipantes}} filmes</b>
+                    </div>
+                </div>
+                <div fxFlex="50" style="text-align: right">
+                    <button mat-raised-button color="primary" [disabled]="torneio.filmesParticipantes.length !== maximoParticipantes"
+                        (click)="gerarCampeonato()">GERAR MEU CAMPEONATO</button>
+                </div>
+            </div>
+
+            <div *ngFor="let grupoFilme of grupoDeFilmes" fxLayout fxLayout.xs="column" fxLayout.sm="column"
+                fxLayout.md="column" fxLayoutGap="10px">
+                <div class="card-filme" *ngFor="let filme of grupoFilme" fxFlex="25">
+                    <app-seletor-filme [filme]="filme" (selecionarFilme)="onSelecionarFilme($event)"></app-seletor-filme>
+                </div>
+            </div>
+        </div>
+    </div>
+</block-ui>

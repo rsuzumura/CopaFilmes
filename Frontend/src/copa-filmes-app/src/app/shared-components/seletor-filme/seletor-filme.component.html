@@ -1,6 +1,6 @@
-<mat-card (click)="selecionarCard($event)">
-    <mat-checkbox color="primary" [(ngModel)]="selecionado">
-        <mat-card-title>{{filme.titulo}}</mat-card-title>
-        <mat-card-subtitle>{{filme.ano}}</mat-card-subtitle>
+<mat-card>
+    <mat-checkbox color="primary" [(ngModel)]="selecionado" (change)="onChange($event)">
+        <h4>{{filme.titulo}}</h4>
+        <p>{{filme.ano}}</p>
     </mat-checkbox>
 </mat-card>

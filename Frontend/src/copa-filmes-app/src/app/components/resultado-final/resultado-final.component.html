@@ -1,3 +1,10 @@
-<p>
-  resultado-final works!
-</p>
+<div class="content">
+    <app-descricao-pagina titulo="Resultado Final" descricao="Veja o resultado final do Campeonato de filmes de forma simples e rápida">
+    </app-descricao-pagina>
+
+    <div class="button-container">
+        <a routerLink="/" mat-raised-button color="primary">GERAR NOVO CAMPEONATO</a>
+    </div>
+
+    <app-vencedores [vencedores]="vencedores"></app-vencedores>
+</div>

@@ -8,10 +8,10 @@ import { environment } from '../../environments/environment';
     providedIn: 'root'
 })
 export class FilmeService {
-
+    private URL = `${environment.movieUrl}filmes`;
     constructor(private client: HttpClient) { }
 
     getFilmes(): Observable<Filme[]> {
-        return this.client.get<Filme[]>(environment.movieUrl);
+        return this.client.get<Filme[]>(this.URL);
     }
 }

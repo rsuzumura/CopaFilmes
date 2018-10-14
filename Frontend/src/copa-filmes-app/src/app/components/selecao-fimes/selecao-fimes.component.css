@@ -1,3 +1,25 @@
 div.content {
     overflow-y: auto;
 }
+
+div.card-filme {
+    margin-bottom: 10px;
+}
+
+div.container {
+    padding: 0 10px;
+}
+
+div.row {
+    margin-bottom: 16px;
+}
+
+.message {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 24px !important;
+    font-weight: 500;
+}
+
+div.torneio-completo {
+    color: #03a87c;
+}

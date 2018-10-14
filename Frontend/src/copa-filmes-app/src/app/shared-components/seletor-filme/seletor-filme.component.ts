@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Filme } from '../../models/filme';
+import { FilmeSelecionadoArgs } from './filme-selecionado-args';
 
 @Component({
     selector: 'app-seletor-filme',
@@ -17,13 +18,15 @@ export class SeletorFilmeComponent implements OnInit {
         this.selecionado = false;
     }
 
-    selecionarCard(event: any) {
-        this.selecionarFilme.emit({
-            selecionado: !this.selecionado
-        });
-    }
-
-    onChange(event: any) {
-        console.log(event);
+    onChange(e) {
+        const args = new FilmeSelecionadoArgs(
+            this.selecionado,
+            this.filme
+        );
+        this.selecionarFilme.emit(args);
+        if (args.cancelar) {
+            e.source.checked = !e.source.checked;
+            this.selecionado = !this.selecionado;
+        }
     }
 }
