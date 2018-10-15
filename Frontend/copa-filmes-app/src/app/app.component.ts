@@ -7,15 +7,4 @@ import { Filme } from './models/filme';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'copa-filmes-app';
-  filme: Filme;
-  constructor() {
-      this.filme = new Filme();
-      this.filme.titulo = 'Ricardo';
-      this.filme.ano = 2012;
-  }
-
-  onSelect(selecionado) {
-      console.log(selecionado);
-  }
 }

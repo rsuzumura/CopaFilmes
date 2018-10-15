@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CopaFilmes.Dominio.Interfaces.Repositorios;
 using CopaFilmes.Repositorio.Http;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +28,11 @@ namespace CopaFilmes.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(fv => {
+                    fv.ImplicitlyValidateChildProperties = true;
+                });
             services.AddScoped<IFilmeRepositorio, FilmeRepositorio>();
         }
 

@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopaFilmes.Dominio.Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopaFilmes.Api", "Backend\src\CopaFilmes.Api\CopaFilmes.Api.csproj", "{6797F1F0-90D4-4008-A85F-90EF7CEF1756}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopaFilmes.Repositorio.Http", "Backend\src\CopaFilmes.Repositorio.Http\CopaFilmes.Repositorio.Http.csproj", "{043E6B1D-F330-4E77-AF63-C7A871AABE78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopaFilmes.Repositorio.Http", "Backend\src\CopaFilmes.Repositorio.Http\CopaFilmes.Repositorio.Http.csproj", "{043E6B1D-F330-4E77-AF63-C7A871AABE78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopaFilmes.Api.Tests", "Backend\tests\CopaFilmes.Api.Tests\CopaFilmes.Api.Tests.csproj", "{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopaFilmes.Repositorio.Http.Tests", "Backend\tests\CopaFilmes.Repositorio.Http.Tests\CopaFilmes.Repositorio.Http.Tests.csproj", "{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,30 @@ Global
 		{043E6B1D-F330-4E77-AF63-C7A871AABE78}.Release|x64.Build.0 = Release|Any CPU
 		{043E6B1D-F330-4E77-AF63-C7A871AABE78}.Release|x86.ActiveCfg = Release|Any CPU
 		{043E6B1D-F330-4E77-AF63-C7A871AABE78}.Release|x86.Build.0 = Release|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Debug|x64.Build.0 = Debug|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Debug|x86.Build.0 = Debug|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Release|x64.ActiveCfg = Release|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Release|x64.Build.0 = Release|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Release|x86.ActiveCfg = Release|Any CPU
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7}.Release|x86.Build.0 = Release|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Debug|x64.Build.0 = Debug|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Debug|x86.Build.0 = Debug|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Release|x64.ActiveCfg = Release|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Release|x64.Build.0 = Release|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Release|x86.ActiveCfg = Release|Any CPU
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +114,8 @@ Global
 		{1E047163-6088-4A0C-8B53-4B1A41370392} = {AD6F5D79-E725-4A99-89E5-66850F46B1A2}
 		{6797F1F0-90D4-4008-A85F-90EF7CEF1756} = {450EE62C-F02A-4989-95DA-D88629DCA61C}
 		{043E6B1D-F330-4E77-AF63-C7A871AABE78} = {450EE62C-F02A-4989-95DA-D88629DCA61C}
+		{F3D63CDB-FCA5-404C-A951-FF1C488A97B7} = {AD6F5D79-E725-4A99-89E5-66850F46B1A2}
+		{06D48618-4AA1-4D47-9EBF-2D8AA7E91FE9} = {AD6F5D79-E725-4A99-89E5-66850F46B1A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96316706-6EE4-44E8-B63A-5A7D85D42AB1}

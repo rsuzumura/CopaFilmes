@@ -29,7 +29,7 @@ namespace CopaFilmes.Dominio.Entidades
 
             if (vencedores.Count == 2)
             {
-                return OrdenarVencedores(vencedores)
+                return OrdenarPosicoes(vencedores)
                     .ToList();
             }
             else
@@ -40,10 +40,10 @@ namespace CopaFilmes.Dominio.Entidades
 
         private Filme DefinirVencedor(Filme[] filmes)
         {
-            return OrdenarVencedores(filmes).First();
+            return OrdenarPosicoes(filmes).First();
         }
 
-        public IEnumerable<Filme> OrdenarVencedores(IEnumerable<Filme> filmes)
+        public IEnumerable<Filme> OrdenarPosicoes(IEnumerable<Filme> filmes)
         {
             return filmes
                 .OrderByDescending(f => f.Nota)
