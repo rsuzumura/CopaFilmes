@@ -25,7 +25,7 @@ namespace CopaFilmes.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<Filme>>> DefinirVencedores([FromBody]Filme[] filmesParticipantes)
+        public async Task<ActionResult<IEnumerable<Filme>>> DefinirVencedoresAsync([FromBody]Filme[] filmesParticipantes)
         {
             var chaveamentoInicial = _geradorChaveamentoPartidas.CriarChaveamento(filmesParticipantes);
             var chaveamentoFinal = _torneio.DisputarPartidas(chaveamentoInicial);
