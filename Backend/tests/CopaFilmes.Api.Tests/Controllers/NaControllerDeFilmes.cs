@@ -1,4 +1,5 @@
 ﻿using CopaFilmes.Api.Controllers;
+using CopaFilmes.Api.ViewModels;
 using CopaFilmes.Dominio.Entidades;
 using CopaFilmes.Dominio.Interfaces.Repositorios;
 using CopaFilmes.Dominio.Interfaces.Servicos;
@@ -18,6 +19,7 @@ namespace CopaFilmes.Api.Tests.Controllers
         {
             //ARRANGE
             var valorEsperado = Task.FromResult(new List<Filme>().AsEnumerable());
+            byte quantidadeEsperada = 8;
             var mockFilmeRepositorio = new Mock<IFilmeRepositorio>();
             var mockRegraQuantidadeMaximaParticipantes = new Mock<IRegraQuantidadeParticipantes>();
             mockFilmeRepositorio
@@ -25,7 +27,7 @@ namespace CopaFilmes.Api.Tests.Controllers
                 .Returns(valorEsperado);
             mockRegraQuantidadeMaximaParticipantes
                 .Setup(r => r.ObterQuantidadeMaxima())
-                .Returns(8);
+                .Returns(quantidadeEsperada);
             var controller = new FilmeController(mockFilmeRepositorio.Object, mockRegraQuantidadeMaximaParticipantes.Object);
 
             //ACT
@@ -33,7 +35,10 @@ namespace CopaFilmes.Api.Tests.Controllers
 
             //ASSERT
             mockFilmeRepositorio.Verify(r => r.ListarFilmesAsync(), Times.Once);
-            Assert.IsType<ActionResult<IEnumerable<Filme>>>(filmesResponse);
+            Assert.IsType<ActionResult<FilmesDisponiveisViewModel>>(filmesResponse);
+            var filmeDisponivelViewModel = (FilmesDisponiveisViewModel)((OkObjectResult)filmesResponse.Result).Value;
+            Assert.Equal(quantidadeEsperada, filmeDisponivelViewModel.QuantidadeMaximaParticipantes);
+            Assert.Same(valorEsperado.Result, filmeDisponivelViewModel.Filmes);
         }
     }
 }

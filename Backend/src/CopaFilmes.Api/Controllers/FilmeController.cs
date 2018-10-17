@@ -1,9 +1,7 @@
 using CopaFilmes.Api.ViewModels;
-using CopaFilmes.Dominio.Entidades;
 using CopaFilmes.Dominio.Interfaces.Repositorios;
 using CopaFilmes.Dominio.Interfaces.Servicos;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CopaFilmes.Api.Controllers
@@ -23,7 +21,7 @@ namespace CopaFilmes.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Filme>>> GetFilmesAsync()
+        public async Task<ActionResult<FilmesDisponiveisViewModel>> GetFilmesAsync()
         {
             var filmes = await _repositorio.ListarFilmesAsync();
             return Ok(new FilmesDisponiveisViewModel
