@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResultadoFinalComponent } from './resultado-final.component';
-import { SelecaoFimesComponent } from '../selecao-fimes/selecao-fimes.component';
+import { SelecaoFilmesComponent } from '../selecao-filmes/selecao-filmes.component';
 import { SharedComponentsModule } from 'src/app/shared-components/shared-components.module';
 import { BlockUIModule } from 'ng-block-ui';
 import { APP_BASE_HREF } from '@angular/common';
@@ -8,6 +8,7 @@ import { TorneioService } from 'src/app/services/torneio.service';
 import { Filme } from 'src/app/models/filme';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ResultadoFinalComponent', () => {
     let component: ResultadoFinalComponent;
@@ -23,8 +24,8 @@ describe('ResultadoFinalComponent', () => {
         };
 
         TestBed.configureTestingModule({
-            declarations: [ResultadoFinalComponent, SelecaoFimesComponent],
-            imports: [SharedComponentsModule, BlockUIModule, RouterTestingModule.withRoutes([]) ],
+            declarations: [ResultadoFinalComponent, SelecaoFilmesComponent],
+            imports: [NoopAnimationsModule, SharedComponentsModule, BlockUIModule, RouterTestingModule.withRoutes([]) ],
             providers: [
                 { provide: APP_BASE_HREF, useValue: '/' },
                 { provide: TorneioService, useValue: torneioServiceStub }

@@ -12,8 +12,6 @@ export class SeletorFilmeComponent implements OnInit {
     @Input() filme: Filme;
     @Output() selecionarFilme = new EventEmitter();
 
-    constructor() { }
-
     ngOnInit() {
         this.selecionado = false;
     }

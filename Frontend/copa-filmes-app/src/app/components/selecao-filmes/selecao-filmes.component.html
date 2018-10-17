@@ -7,24 +7,24 @@
 
 <block-ui [template]="blockTemplate">
     <div class="content">
-        <app-descricao-pagina titulo="Fase de Seleção" descricao="Selecione 8 filmes que você deseja que entrem na competição e depois pressione o botão Gerar Meu Campeonato para prosseguir">
+        <app-descricao-pagina [titulo]="titulo" [descricao]="descricao">
         </app-descricao-pagina>
 
-        <div class="container">
+        <div class="container" *ngIf="grupoDeFilmes != null">
             <div fxLayout="row" class="row">
                 <div fxFlex="50" class="mat-typography">
                     <div><b>Selecionados:</b></div>
-                    <div [class.torneio-completo]="torneio.filmesParticipantes.length === maximoParticipantes">
-                        <b>{{torneio.filmesParticipantes.length}} de {{maximoParticipantes}} filmes</b>
+                    <div [class.torneio-completo]="filmesParticipantes.length === maximoParticipantes">
+                        <b>{{filmesParticipantes.length}} de {{maximoParticipantes}} filmes</b>
                     </div>
                 </div>
                 <div fxFlex="50" style="text-align: right">
-                    <button mat-raised-button color="primary" [disabled]="torneio.filmesParticipantes.length !== maximoParticipantes"
+                    <button id="gerarCampeonato" mat-raised-button color="primary" [disabled]="filmesParticipantes.length !== maximoParticipantes"
                         (click)="gerarCampeonato()">GERAR MEU CAMPEONATO</button>
                 </div>
             </div>
 
-            <div *ngFor="let grupoFilme of grupoDeFilmes" fxLayout fxLayout.xs="column" fxLayout.sm="column"
+            <div *ngFor="let grupoFilme of grupoDeFilmes.linhas" fxLayout fxLayout.xs="column" fxLayout.sm="column"
                 fxLayout.md="column" fxLayoutGap="10px">
                 <div class="card-filme" *ngFor="let filme of grupoFilme" fxFlex="25">
                     <app-seletor-filme [filme]="filme" (selecionarFilme)="onSelecionarFilme($event)"></app-seletor-filme>

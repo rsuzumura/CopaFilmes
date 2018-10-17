@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Filme } from 'src/app/models/filme';
 
 @Component({
@@ -6,10 +6,6 @@ import { Filme } from 'src/app/models/filme';
     templateUrl: './vencedores.component.html',
     styleUrls: ['./vencedores.component.css']
 })
-export class VencedoresComponent implements OnInit {
+export class VencedoresComponent {
     @Input() vencedores: Filme[];
-    constructor() { }
-
-    ngOnInit() {
-    }
 }

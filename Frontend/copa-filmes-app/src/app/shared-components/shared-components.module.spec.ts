@@ -7,7 +7,7 @@ describe('SharedComponentsModule', () => {
     sharedComponentsModule = new SharedComponentsModule();
   });
 
-  it('should create an instance', () => {
+  it('deve criar a instância', () => {
     expect(sharedComponentsModule).toBeTruthy();
   });
 });

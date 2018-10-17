@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { BlockUIModule } from 'ng-block-ui';
 import { SharedComponentsModule } from './shared-components/shared-components.module';
 import { AppComponent } from './app.component';
-import { SelecaoFimesComponent } from './components/selecao-fimes/selecao-fimes.component';
+import { SelecaoFilmesComponent } from './components/selecao-filmes/selecao-filmes.component';
 import { ResultadoFinalComponent } from './components/resultado-final/resultado-final.component';
 import { APP_BASE_HREF } from '@angular/common';
 
@@ -13,7 +13,7 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent,
-                SelecaoFimesComponent,
+                SelecaoFilmesComponent,
                 ResultadoFinalComponent
             ],
             imports: [AppRoutingModule, MatToolbarModule, BlockUIModule, SharedComponentsModule],

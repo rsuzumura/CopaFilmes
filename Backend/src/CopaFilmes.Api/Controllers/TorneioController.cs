@@ -1,4 +1,5 @@
 ﻿using CopaFilmes.Dominio.Entidades;
+using CopaFilmes.Dominio.Interfaces.Servicos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,10 +10,26 @@ namespace CopaFilmes.Api.Controllers
     [ApiController]
     public class TorneioController : ControllerBase
     {
-        [HttpPost]
-        public async Task<ActionResult<IEnumerable<Filme>>> DefinirVencedores([FromBody]Torneio torneio)
+        private readonly IGeradorChaveamentoPartidas _geradorChaveamentoPartidas;
+        private readonly ITorneio _torneio;
+        private readonly IRegraVencedor _regraVencedor;
+
+        public TorneioController(
+            IGeradorChaveamentoPartidas geradorChaveamentoPartidas,
+            ITorneio torneio,
+            IRegraVencedor regraVencedor)
         {
-            var vencedores = torneio.DefinirVencedores();
+            _geradorChaveamentoPartidas = geradorChaveamentoPartidas;
+            _torneio = torneio;
+            _regraVencedor = regraVencedor;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<Filme>>> DefinirVencedores([FromBody]Filme[] filmesParticipantes)
+        {
+            var chaveamentoInicial = _geradorChaveamentoPartidas.CriarChaveamento(filmesParticipantes);
+            var chaveamentoFinal = _torneio.DisputarPartidas(chaveamentoInicial);
+            var vencedores = _regraVencedor.Ranquear(chaveamentoFinal[0]);
             return await Task.FromResult(Ok(vencedores));
         }
     }

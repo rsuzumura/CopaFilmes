@@ -5,18 +5,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MatToolbarModule, MatCheckboxModule, MatButtonModule } from '@angular/material';
+import { MatToolbarModule, MatCheckboxModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
 import { SharedComponentsModule } from './shared-components/shared-components.module';
 import { BlockUIModule } from 'ng-block-ui';
 
 import { AppComponent } from './app.component';
-import { SelecaoFimesComponent } from './components/selecao-fimes/selecao-fimes.component';
+import { SelecaoFilmesComponent } from './components/selecao-filmes/selecao-filmes.component';
 import { ResultadoFinalComponent } from './components/resultado-final/resultado-final.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SelecaoFimesComponent,
+    SelecaoFilmesComponent,
     ResultadoFinalComponent
   ],
   imports: [
@@ -31,6 +31,7 @@ import { ResultadoFinalComponent } from './components/resultado-final/resultado-
     MatToolbarModule,
     MatCheckboxModule,
     MatButtonModule,
+    MatSnackBarModule,
     SharedComponentsModule
   ],
   providers: [],

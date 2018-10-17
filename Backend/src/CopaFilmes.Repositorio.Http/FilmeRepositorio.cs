@@ -12,10 +12,9 @@ namespace CopaFilmes.Repositorio.Http
     public class FilmeRepositorio : IFilmeRepositorio, IDisposable
     {
         private readonly HttpClient _client;
-        public FilmeRepositorio(IConfiguration configuration)
+        public FilmeRepositorio(HttpClient client)
         {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri(configuration["FilmeUrl"]);
+            _client = client;
         }
 
         public async Task<IEnumerable<Filme>> ListarFilmesAsync()
@@ -28,7 +27,7 @@ namespace CopaFilmes.Repositorio.Http
 
         public void Dispose()
         {
-            _client?.Dispose();
+            _client.Dispose();
         }
     }
 }

@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CopaFilmes.Api.Servicos;
+using CopaFilmes.Api.Validators;
+using CopaFilmes.Dominio.Entidades;
 using CopaFilmes.Dominio.Interfaces.Repositorios;
+using CopaFilmes.Dominio.Interfaces.Servicos;
+using CopaFilmes.Dominio.Servicos;
 using CopaFilmes.Repositorio.Http;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using System;
+using System.Net.Http;
 
 namespace CopaFilmes.Api
 {
@@ -33,7 +34,20 @@ namespace CopaFilmes.Api
                 .AddFluentValidation(fv => {
                     fv.ImplicitlyValidateChildProperties = true;
                 });
+            services.AddScoped(provider =>
+            {
+                var url = this.Configuration["FilmeUrl"];
+                var client = new HttpClient();
+                client.BaseAddress = new Uri(url);
+                return client;
+            });
             services.AddScoped<IFilmeRepositorio, FilmeRepositorio>();
+            services.AddSingleton<ITorneio, TorneioMataMata>();
+            services.AddSingleton<IGeradorChaveamentoPartidas, ChaveamentoDePartidasEntreExtremosDaLista>();
+            services.AddSingleton<IRegraVencedor, RegraVencedorMaiorNota>();
+            services.AddSingleton<IRegraQuantidadeParticipantes, RegraQuantidadeParticipantesDaConfiguracao>();
+            services.AddTransient<IValidator<Filme>, FilmeValidator>();
+            services.AddTransient<IValidator<Filme[]>, FilmesParticipantesValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

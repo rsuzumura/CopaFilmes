@@ -1,6 +1,7 @@
 ﻿using CopaFilmes.Api.Controllers;
 using CopaFilmes.Dominio.Entidades;
 using CopaFilmes.Dominio.Interfaces.Repositorios;
+using CopaFilmes.Dominio.Interfaces.Servicos;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
@@ -15,14 +16,23 @@ namespace CopaFilmes.Api.Tests.Controllers
         [Fact]
         public async Task AoSolicitarAListagemDeFilmesDeveRetornarUmaColecaoDeFilmes()
         {
-            var result = Task.FromResult(new List<Filme>().AsEnumerable());
-            var mockRepository = new Mock<IFilmeRepositorio>();
-            mockRepository
+            //ARRANGE
+            var valorEsperado = Task.FromResult(new List<Filme>().AsEnumerable());
+            var mockFilmeRepositorio = new Mock<IFilmeRepositorio>();
+            var mockRegraQuantidadeMaximaParticipantes = new Mock<IRegraQuantidadeParticipantes>();
+            mockFilmeRepositorio
                 .Setup(r => r.ListarFilmesAsync())
-                .Returns(result);
-            var controller = new FilmeController(mockRepository.Object);
+                .Returns(valorEsperado);
+            mockRegraQuantidadeMaximaParticipantes
+                .Setup(r => r.ObterQuantidadeMaxima())
+                .Returns(8);
+            var controller = new FilmeController(mockFilmeRepositorio.Object, mockRegraQuantidadeMaximaParticipantes.Object);
+
+            //ACT
             var filmesResponse = await controller.GetFilmesAsync();
-            mockRepository.Verify(r => r.ListarFilmesAsync(), Times.Once);
+
+            //ASSERT
+            mockFilmeRepositorio.Verify(r => r.ListarFilmesAsync(), Times.Once);
             Assert.IsType<ActionResult<IEnumerable<Filme>>>(filmesResponse);
         }
     }

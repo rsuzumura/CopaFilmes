@@ -5,7 +5,6 @@ import { TorneioService } from './torneio.service';
 import { Filme } from '../models/filme';
 import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Torneio } from '../models/torneio';
 
 describe('TorneioService', () => {
     let httpClientSpy: { post: jasmine.Spy };
@@ -31,7 +30,7 @@ describe('TorneioService', () => {
 
     it('ao definir os vencedores, devem ser retornados os filmes vencedores', () => {
         const service: TorneioService = TestBed.get(TorneioService);
-        service.definirVencedores(new Torneio())
+        service.definirVencedores([])
             .subscribe(filmes => {
                 expect(filmes).toEqual(filmesEsperados);
                 expect(service.obterVencedores()).toEqual(filmesEsperados);
@@ -42,7 +41,7 @@ describe('TorneioService', () => {
 
     it('ao resetar os vencedores, a lista de vencedores deve estar vazia', () => {
         const service: TorneioService = TestBed.get(TorneioService);
-        service.definirVencedores(new Torneio())
+        service.definirVencedores([])
             .subscribe(() => {
                 expect(service.obterVencedores()).toEqual(filmesEsperados);
                 service.reset();
