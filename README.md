@@ -27,7 +27,7 @@ npm install
 ng serve
 ```
 Usualmente, a aplicação vai estar disponível no seguinte endereço:
-- https://localhost:4200
+- http://localhost:4200
 
 ## Executando os Testes
 
