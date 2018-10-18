@@ -51,4 +51,4 @@ ng test
 ```
 ## Licença
 
-Este projeto está sobre a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para maiores detalhes.
+Este projeto está sobre a licença MIT - veja o arquivo [LICENSE](LICENSE) para maiores detalhes.
