@@ -30,8 +30,8 @@ describe('SelecaoFilmesComponent', () => {
             }
         };
         const torneioServiceStub: Partial<TorneioService> = {
-            definirVencedores(torneio: Torneio) {
-                return of(filmes);
+            definirVencedores(filmesParticipantes: Filme[]) {
+                return of(FILMES);
             },
             reset() {
             }

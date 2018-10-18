@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CopaFilmes.Api.Controllers
 {
+    /// <summary>
+    /// Gerador de torneio entre os filmes
+    /// </summary>
     [Route("api/v1/[controller]")]
     [ApiController]
     public class TorneioController : ControllerBase
@@ -24,6 +27,11 @@ namespace CopaFilmes.Api.Controllers
             _regraVencedor = regraVencedor;
         }
 
+        /// <summary>
+        /// Cria o chaveamento do torneio com os filmes selecionados e executa as partidas até encontrar o campeão e vice
+        /// </summary>
+        /// <param name="filmesParticipantes">Lista de filmes</param>
+        /// <returns>Filmes campeão e vice</returns>
         [HttpPost]
         public async Task<ActionResult<IEnumerable<Filme>>> DefinirVencedoresAsync([FromBody]Filme[] filmesParticipantes)
         {
