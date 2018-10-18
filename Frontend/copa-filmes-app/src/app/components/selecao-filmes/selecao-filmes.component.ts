@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { finalize } from 'rxjs/operators';
+import { finalize, catchError } from 'rxjs/operators';
 import _ from 'lodash';
 
 import { FilmeService } from '../../services/filme.service';
@@ -10,6 +10,7 @@ import { TorneioService } from 'src/app/services/torneio.service';
 import { FilmeSelecionadoArgs } from 'src/app/shared-components/seletor-filme/filme-selecionado-args';
 import { GrupoDeFilmes } from './grupo-de-filmes';
 import { Filme } from 'src/app/models/filme';
+import { EMPTY } from 'rxjs';
 
 @Component({
     selector: 'app-selecao-filmes',
@@ -38,6 +39,11 @@ export class SelecaoFilmesComponent implements OnInit {
         this.torneioService.reset();
         this.filmeService.getFilmes()
             .pipe(
+                catchError(e => {
+                    console.error(e);
+                    this.router.navigate(['erro']);
+                    return EMPTY;
+                }),
                 finalize(() => {
                     this.blockUI.stop();
                 })
@@ -68,12 +74,19 @@ export class SelecaoFilmesComponent implements OnInit {
     }
 
     gerarCampeonato() {
-        this.blockUI.start();
-        this.torneioService.definirVencedores(this.filmesParticipantes)
-            .pipe(
-                finalize(() => this.blockUI.stop())
-            ).subscribe(filmes => {
-                this.router.navigate(['/resultado-final']);
-            });
+        if (this.maximoParticipantes === this.filmesParticipantes.length) {
+            this.blockUI.start();
+            this.torneioService.definirVencedores(this.filmesParticipantes)
+                .pipe(
+                    catchError(e => {
+                        console.error(e);
+                        this.snackBar.open('Ocorreu um problema durante a geração do torneio, tente novamente.', null, { duration: 1000 });
+                        return EMPTY;
+                    }),
+                    finalize(() => this.blockUI.stop())
+                ).subscribe(filmes => {
+                    this.router.navigate(['/resultado-final']);
+                });
+        }
     }
 }

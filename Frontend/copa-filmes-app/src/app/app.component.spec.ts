@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SelecaoFilmesComponent } from './components/selecao-filmes/selecao-filmes.component';
 import { ResultadoFinalComponent } from './components/resultado-final/resultado-final.component';
 import { APP_BASE_HREF } from '@angular/common';
+import { ErroComponent } from './components/erro/erro.component';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -14,7 +15,8 @@ describe('AppComponent', () => {
             declarations: [
                 AppComponent,
                 SelecaoFilmesComponent,
-                ResultadoFinalComponent
+                ResultadoFinalComponent,
+                ErroComponent
             ],
             imports: [AppRoutingModule, MatToolbarModule, BlockUIModule, SharedComponentsModule],
             providers: [{ provide: APP_BASE_HREF, useValue: '/' }]

@@ -12,12 +12,14 @@ import { BlockUIModule } from 'ng-block-ui';
 import { AppComponent } from './app.component';
 import { SelecaoFilmesComponent } from './components/selecao-filmes/selecao-filmes.component';
 import { ResultadoFinalComponent } from './components/resultado-final/resultado-final.component';
+import { ErroComponent } from './components/erro/erro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SelecaoFilmesComponent,
-    ResultadoFinalComponent
+    ResultadoFinalComponent,
+    ErroComponent
   ],
   imports: [
     BrowserModule,
