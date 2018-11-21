@@ -19,7 +19,7 @@ namespace CopaFilmes.Repositorio.Http
 
         public async Task<IEnumerable<Filme>> ListarFilmesAsync()
         {
-            var response = await _client.GetAsync("");
+            var response = await _client.GetAsync($"{nameof(Filme)}s");
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<IEnumerable<Filme>>(json);
