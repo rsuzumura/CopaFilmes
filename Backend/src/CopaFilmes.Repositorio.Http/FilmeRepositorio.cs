@@ -1,15 +1,13 @@
 ﻿using CopaFilmes.Dominio.Entidades;
 using CopaFilmes.Dominio.Interfaces.Repositorios;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace CopaFilmes.Repositorio.Http
 {
-    public class FilmeRepositorio : IFilmeRepositorio, IDisposable
+    public class FilmeRepositorio : IFilmeRepositorio
     {
         private readonly HttpClient _client;
         public FilmeRepositorio(HttpClient client)
@@ -23,11 +21,6 @@ namespace CopaFilmes.Repositorio.Http
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<IEnumerable<Filme>>(json);
-        }
-
-        public void Dispose()
-        {
-            _client.Dispose();
         }
     }
 }
