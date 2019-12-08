@@ -9,10 +9,9 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Net.Http;
 
@@ -27,36 +26,31 @@ namespace CopaFilmes.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            services
+                .AddControllers()
                 .AddFluentValidation(fv => {
                     fv.ImplicitlyValidateChildProperties = true;
                 });
-            services.AddScoped(provider =>
+            services.AddHttpClient<IFilmeRepositorio, FilmeRepositorio>(client =>
             {
-                var url = this.Configuration["FilmeUrl"];
-                var client = new HttpClient();
-                client.BaseAddress = new Uri(url);
-                return client;
+                client.BaseAddress = new Uri(Configuration["FilmeUrl"]);
             });
-            services.AddScoped<IFilmeRepositorio, FilmeRepositorio>();
             services.AddSingleton<ITorneio, TorneioMataMata>();
             services.AddSingleton<IGeradorChaveamentoPartidas, ChaveamentoDePartidasEntreExtremosDaLista>();
             services.AddSingleton<IRegraVencedor, RegraVencedorMaiorNota>();
             services.AddSingleton<IRegraQuantidadeParticipantes, RegraQuantidadeParticipantesDaConfiguracao>();
             services.AddTransient<IValidator<Filme>, FilmeValidator>();
             services.AddTransient<IValidator<Filme[]>, FilmesParticipantesValidator>();
-            services.AddSwaggerGen(c =>
+            services.AddOpenApiDocument(o =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Copa de Filmes", Version = "v1" });
+                o.Title = "Copa de Filmes";
+                o.Version = "v1";
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -74,13 +68,14 @@ namespace CopaFilmes.Api
                 app.UseHsts();
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Copa de Filmes API V1");
-            });
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
