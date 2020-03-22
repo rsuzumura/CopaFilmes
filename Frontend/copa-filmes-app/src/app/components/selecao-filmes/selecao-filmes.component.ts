@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize, catchError } from 'rxjs/operators';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 import { FilmeService } from '../../services/filme.service';
 import { TorneioService } from 'src/app/services/torneio.service';
@@ -15,7 +15,7 @@ import { EMPTY } from 'rxjs';
 @Component({
     selector: 'app-selecao-filmes',
     templateUrl: './selecao-filmes.component.html',
-    styleUrls: ['./selecao-filmes.component.css']
+    styleUrls: ['./selecao-filmes.component.scss']
 })
 export class SelecaoFilmesComponent implements OnInit {
     @BlockUI() blockUI: NgBlockUI;
@@ -84,7 +84,7 @@ export class SelecaoFilmesComponent implements OnInit {
                         return EMPTY;
                     }),
                     finalize(() => this.blockUI.stop())
-                ).subscribe(filmes => {
+                ).subscribe(() => {
                     this.router.navigate(['/resultado-final']);
                 });
         }

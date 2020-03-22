@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
-import { MatToolbarModule } from '@angular/material';
-import { AppRoutingModule } from './app.routing.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { AppRoutingModule } from './app-routing.module';
 import { BlockUIModule } from 'ng-block-ui';
 import { SharedComponentsModule } from './shared-components/shared-components.module';
 import { AppComponent } from './app.component';

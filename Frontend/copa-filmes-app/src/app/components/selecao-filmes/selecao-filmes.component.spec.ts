@@ -2,28 +2,27 @@ import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core
 
 import { SelecaoFilmesComponent } from './selecao-filmes.component';
 import { SharedComponentsModule } from 'src/app/shared-components/shared-components.module';
-import { BlockUIModule } from 'ng-block-ui';
-import { AppRoutingModule } from 'src/app/app.routing.module';
+import { BlockUIModule, ɵc as BlockUIInstanceService } from 'ng-block-ui';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ResultadoFinalComponent } from '../resultado-final/resultado-final.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { FilmeService } from 'src/app/services/filme.service';
 import { Filme } from 'src/app/models/filme';
 import { of } from 'rxjs';
 import { TorneioService } from 'src/app/services/torneio.service';
-import { BlockUIInstanceService } from 'ng-block-ui/lib/services/block-ui-instance.service';
 import { FILMES } from 'src/app/mocks/filmes.mock';
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ErroComponent } from '../erro/erro.component';
 import { FilmeSelecionadoArgs } from 'src/app/shared-components/seletor-filme/filme-selecionado-args';
 import { Router } from '@angular/router';
 
-describe('SelecaoFilmesComponent', () => {
+describe(SelecaoFilmesComponent.name, () => {
     let component: SelecaoFilmesComponent;
     let fixture: ComponentFixture<SelecaoFilmesComponent>;
     let router: Router;
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         const filmeServiceStub: Partial<FilmeService> = {
             getFilmes() {
                 const filmesDisponiveis = {
@@ -56,11 +55,8 @@ describe('SelecaoFilmesComponent', () => {
                 { provide: BlockUIInstanceService, useValue: blockUIServiceStub }
             ]
         }).compileComponents();
-        router = TestBed.get(Router);
+        router = TestBed.inject(Router);
         spyOn(router, 'navigate');
-    }));
-
-    beforeEach(() => {
         fixture = TestBed.createComponent(SelecaoFilmesComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -100,8 +96,8 @@ describe('SelecaoFilmesComponent', () => {
 
     it('deve bloquear seleção de filmes ao selecionar mais que a quantidade esperada', () => {
         const checkboxes = fixture.debugElement.nativeElement.querySelectorAll('mat-checkbox');
-        for (let i = 0; i < checkboxes.length; i++) {
-            const input = checkboxes[i].querySelector('input');
+        for (const checkbox of checkboxes) {
+            const input = checkbox.querySelector('input');
             input.click();
         }
         fixture.detectChanges();
@@ -110,7 +106,7 @@ describe('SelecaoFilmesComponent', () => {
         });
     });
 
-    it('após selecionar 3 filmes, ao clicar novamente neles, a seleção deve ser removida', async() => {
+    it('após selecionar 3 filmes, ao clicar novamente neles, a seleção deve ser removida', async () => {
         const checkboxes = fixture.debugElement.nativeElement.querySelectorAll('mat-checkbox');
         for (let i = 0; i < 3; i++) {
             const input = checkboxes[i].querySelector('input');

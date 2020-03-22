@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SeletorFilmeComponent } from './seletor-filme.component';
-import { MatCheckboxModule, MatCardModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { Filme } from 'src/app/models/filme';
 

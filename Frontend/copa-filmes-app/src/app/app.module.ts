@@ -3,9 +3,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app.routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MatToolbarModule, MatCheckboxModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedComponentsModule } from './shared-components/shared-components.module';
 import { BlockUIModule } from 'ng-block-ui';
 
