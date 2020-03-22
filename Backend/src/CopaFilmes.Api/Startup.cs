@@ -13,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Net.Http;
 
 namespace CopaFilmes.Api
 {
@@ -55,18 +54,19 @@ namespace CopaFilmes.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCors(builder => {
-                    builder
-                       .WithOrigins("http://localhost:4200")
-                       .AllowAnyMethod()
-                       .AllowAnyHeader()
-                       .AllowCredentials();
-                });
             }
             else
             {
                 app.UseHsts();
             }
+            var allowedOrigins = Configuration.GetSection("AllowedOrigins").Get<string[]>();
+             app.UseCors(builder => {
+                    builder
+                       .WithOrigins(allowedOrigins)
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials();
+                });
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
