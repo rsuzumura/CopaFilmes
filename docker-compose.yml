@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  copafilmes:
+    build:
+      context: ./Backend/src
+    ports:
+      - "5001:80"
+    environment:
+      - "FilmeUrl=http://copafilmes.azurewebsites.net/api/"
+      - "QuantidadeMaximaParticipantes=8"
+  copa-filmes-angular:
+    build:
+      context: ./Frontend/copa-filmes-app
+    ports:
+      - "4200:80"
+    depends_on:
+      - copafilmes
